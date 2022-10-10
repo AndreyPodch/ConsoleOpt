@@ -140,6 +140,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BasicDef.cpp" />
     <ClCompile Include="GradOptFR.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
