@@ -24,12 +24,18 @@
     <ClCompile Include="BasicDef.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="LinearOptimizator.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicDef.h">
       <Filter>Исходные файлы</Filter>
     </ClInclude>
     <ClInclude Include="GradOptFR.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="LinearOptimizator.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

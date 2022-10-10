@@ -5,9 +5,9 @@ std::pair<double, vector<double>> GradOptFR::optimize(vector<double> x0) const
 	vector<double> x1;
 	do
 	{
-		double alpha = lopt([x0, this, p](double x)->double {return f(x0 + x * p); },
-							[x0, this, p](double x)->double {return scalarProduct(gf(x0 + x * p), x * p); }).second;
-		x1 = x0 + alpha * p;
+		double alpha = lo.optimize([x0, this, p](double x)->double {return f(x0 + x * p); },
+									[x0, this, p](double x)->double {return scalarProduct(gf(x0 + x * p), p); });
+	//	x1 = x0 + alpha * p;
 		vector<double> nextGrad = gf(x1);
 		double beta = scalarProduct(nextGrad, nextGrad) / scalarProduct(p, p);
 		p = beta * p - gf(x0);

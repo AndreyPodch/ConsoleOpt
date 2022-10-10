@@ -142,11 +142,13 @@
   <ItemGroup>
     <ClCompile Include="BasicDef.cpp" />
     <ClCompile Include="GradOptFR.cpp" />
+    <ClCompile Include="LinearOptimizator.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicDef.h" />
     <ClInclude Include="GradOptFR.h" />
+    <ClInclude Include="LinearOptimizator.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
