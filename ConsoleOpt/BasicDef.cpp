@@ -1,6 +1,6 @@
 #include "BasicDef.h"
 
-inline double scalarProduct(vector<double> x, vector<double> y)
+double scalarProduct(vector<double> x, vector<double> y)
 {
 	if (x.size() != y.size()) throw std::out_of_range("Wrong vector sizes in scalar product");
 	double sp = 0;

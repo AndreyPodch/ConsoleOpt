@@ -6,6 +6,6 @@ private:
 	linearOptimizeMethod lom;
 public:
 	LinearOptimizator(linearOptimizeMethod lom_) : lom(lom_) {};
-	double optimize(std::function <double(double)> f, std::function <double(double)> df) const;
+	std::pair<double, double> optimize(std::function <double(double)> f, std::function <double(double)> df) const;
 };
 

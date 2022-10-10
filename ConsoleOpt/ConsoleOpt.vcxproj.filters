@@ -32,9 +32,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BasicDef.h">
-      <Filter>Исходные файлы</Filter>
-    </ClInclude>
     <ClInclude Include="GradOptFR.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
@@ -42,7 +39,10 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="LlnearOptimizeMethods.h">
-      <Filter>Исходные файлы</Filter>
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="BasicDef.h">
+      <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
