@@ -13,3 +13,4 @@ std::pair<double, vector<double>> GradOptFR::optimize(vector<double> x0) const
 		p = beta * p - gf(x0);
 	} while (!st(x0,f(x0),x1,f(x1)));
 }
++

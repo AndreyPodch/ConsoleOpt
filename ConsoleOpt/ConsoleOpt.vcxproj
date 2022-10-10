@@ -143,12 +143,14 @@
     <ClCompile Include="BasicDef.cpp" />
     <ClCompile Include="GradOptFR.cpp" />
     <ClCompile Include="LinearOptimizator.cpp" />
+    <ClCompile Include="LlnearOptimizeMethods.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicDef.h" />
     <ClInclude Include="GradOptFR.h" />
     <ClInclude Include="LinearOptimizator.h" />
+    <ClInclude Include="LlnearOptimizeMethods.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

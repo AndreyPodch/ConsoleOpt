@@ -27,6 +27,9 @@
     <ClCompile Include="LinearOptimizator.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="LlnearOptimizeMethods.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicDef.h">
@@ -37,6 +40,9 @@
     </ClInclude>
     <ClInclude Include="LinearOptimizator.h">
       <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="LlnearOptimizeMethods.h">
+      <Filter>Исходные файлы</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

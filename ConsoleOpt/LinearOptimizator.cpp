@@ -5,7 +5,7 @@ double LinearOptimizator::optimize(std::function<double(double)> f, std::functio
     double optimalValue=f(-LINEAR_OPTIMIZE_INDENT);
     for (double i = -LINEAR_OPTIMIZE_INDENT; i < LINEAR_OPTIMIZE_INDENT; i += LINEAR_OPTIMIZE_SPLIT_SIZE)
     {
-        optimalValue = std::max(optimalValue, lom(i, i + LINEAR_OPTIMIZE_SPLIT_SIZE, f, df).second);
+        optimalValue = std::min(optimalValue, lom(i, i + LINEAR_OPTIMIZE_SPLIT_SIZE, f, df).second);
     }
     return optimalValue;
 }
