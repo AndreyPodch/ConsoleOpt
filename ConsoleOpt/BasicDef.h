@@ -7,7 +7,7 @@
 using namespace boost::numeric::ublas;
 
 const double LINEAR_OPTIMIZE_INDENT = 1;
-const double LINEAR_OPTIMIZE_SPLIT_SIZE = 1e-3;
+const double LINEAR_OPTIMIZE_SPLIT_SIZE = 1e-5;
 
 typedef double(*smoothFunction)(vector<double> x);
 typedef vector<double>(*gradientFunction)(vector<double> x);
