@@ -13,14 +13,18 @@ vector<double> gf1(vector<double> x)
 }
 double f2(vector<double> x)
 {
-	return x[0]*x[0]*x[0]*x[0]+x[1];
+	return pow(x[0]-sqrt(2),2)+pow(x[1]-sqrt(2),2);
 }
 vector<double> gf2(vector<double> x)
 {
 	vector<double> vr(x.size());
-	vr[0] = 4 * x[0] * x[0] * x[0];
-	vr[1] = 1;
+	vr[0] = 2 * x[0] - sqrt(2);
+	vr[1] = 2 * x[1] - sqrt(2);
 	return vr;
+}
+bool circleArea(vector<double> x)
+{
+	return (x[0] * x[0] + x[1] * x[1] < 1);
 }
 bool closeCr(vector<double> x0, double f0, vector<double> x1, double f1)
 {
@@ -30,9 +34,9 @@ bool closeCr(vector<double> x0, double f0, vector<double> x1, double f1)
 int main()
 {
 	LinearOptimizator w(linearSearch);
-	GradOptFR pw(f2, gf2, closeCr, w);
+	GradOptFR pw(f2, gf2, closeCr, w, circleArea);
 	vector<double> testv(2);
-	testv[0] = 12;
-	testv[1] = 3;
+	testv[0] = 0;
+	testv[1] = 0;
 	std::cout << pw.optimize(testv).second;
 }

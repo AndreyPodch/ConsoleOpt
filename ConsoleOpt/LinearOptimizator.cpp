@@ -1,12 +1,13 @@
 #include "LinearOptimizator.h"
 
-std::pair<double,double> LinearOptimizator::optimize(std::function<double(double)> f, std::function<double(double)> df) const
+std::pair<double, double> LinearOptimizator::optimize(std::function<double(double)> f, std::function<double(double)> df, std::function<bool(double)> inSegment) const
 {
-    double optimalValue=f(-LINEAR_OPTIMIZE_INDENT);
-    double optimalPoint = -LINEAR_OPTIMIZE_INDENT;
-    for (double i = -LINEAR_OPTIMIZE_INDENT; i < LINEAR_OPTIMIZE_INDENT; i += LINEAR_OPTIMIZE_SPLIT_SIZE)
+    double optimalValue=f(-indent);
+    double optimalPoint = -indent;
+    for (double i = -indent; i < indent; i += step)
     {
-        std::pair<double, double> curIt = lom(i, i + LINEAR_OPTIMIZE_SPLIT_SIZE, f, df);
+        if (!inSegment(i) || !inSegment(i + step)) continue;
+        std::pair<double, double> curIt = lom(i, i + step, f, df);
         if (curIt.second < optimalValue)
         {
             optimalPoint = curIt.first;

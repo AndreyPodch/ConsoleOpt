@@ -13,5 +13,6 @@ typedef double(*smoothFunction)(vector<double> x);
 typedef vector<double>(*gradientFunction)(vector<double> x);
 typedef bool(*stopCriteria)(vector<double> x0, double f0, vector<double> x1, double f1);
 typedef std::pair<double, double>(*linearOptimizeMethod)(double a, double b, std::function <double(double)> f, std::function <double(double)> df);
+typedef bool(*inAreaCheck)(vector<double>);
 
 double scalarProduct(vector<double> x, vector<double> y);
