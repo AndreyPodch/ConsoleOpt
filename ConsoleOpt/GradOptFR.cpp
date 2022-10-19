@@ -3,6 +3,7 @@ std::pair<vector<double>, double> GradOptFR::optimize(vector<double> x0) const
 {
 	vector<double> p = -gf(x0);
 	vector<double> x1 = x0;
+	size_t curIter = 0;
 	do
 	{
 		x0 = x1;
@@ -17,6 +18,7 @@ std::pair<vector<double>, double> GradOptFR::optimize(vector<double> x0) const
 		std::cout << gf(x0)[0] << " " << gf(x0)[1] << std::endl;
 		std::cout << x1[0] << " " << x1[1] << std::endl;
 		std::cout << gf(x1)[0] << " " << gf(x1)[1] << std::endl;
+		if (curIter++ > maxIteration) break;
 	} while (!st(x0,f(x0),x1,f(x1)));
 	return std::make_pair(x1, f(x1));
 }
