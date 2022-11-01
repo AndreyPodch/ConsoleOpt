@@ -141,17 +141,21 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BasicDef.cpp" />
+    <ClCompile Include="DerivativeOptimizatorInterface.cpp" />
     <ClCompile Include="GradOptFR.cpp" />
     <ClCompile Include="LinearOptimizator.cpp" />
     <ClCompile Include="LlnearOptimizeMethods.cpp" />
+    <ClCompile Include="OptimizatorInterface.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="StochasticOptimizator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicDef.h" />
+    <ClInclude Include="DerivativeOptimizatorInterface.h" />
     <ClInclude Include="GradOptFR.h" />
     <ClInclude Include="LinearOptimizator.h" />
     <ClInclude Include="LlnearOptimizeMethods.h" />
+    <ClInclude Include="OptimizatorInterface.h" />
     <ClInclude Include="StochasticOptimizator.h" />
   </ItemGroup>
   <ItemGroup>

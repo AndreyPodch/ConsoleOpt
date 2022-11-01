@@ -44,7 +44,7 @@ vector<double> randomInSquare()
 
 int main()
 {
-	LinearOptimizator w(linearSearch);
+	LinearOptimizator w(nullptr, nullptr, nullptr, linearSearch);
 	GradOptFR pw(f2, gf2, closeCr, w, circleArea);
 	vector<double> testv(2);
 	testv[0] = 0;

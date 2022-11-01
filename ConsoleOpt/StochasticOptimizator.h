@@ -1,18 +1,17 @@
 #pragma once
 #include "BasicDef.h"
-class StochasticOptimizator
+#include "OptimizatorInterface.h"
+class StochasticOptimizator: public OptimizatorInterface<vector<double>> 
 {
 private:
-	smoothFunction f;
-	size_t maxIteration;
 	double radiusOfCut;
-	randomPointInCoverArea randomPt;
-	inAreaCheck inArea;
+	randomPointInCoveringArea randomPt;
 	bool isNotCutted(std::list<vector<double>>& v, vector<double> x0) const;
 public:
-	StochasticOptimizator(smoothFunction f_, inAreaCheck inArea_, randomPointInCoverArea randomPt_,
-		double radiusOfCut_=STANDART_RADIUS_OF_CUT, size_t maxIteration_ = MAX_OPTIMIZE_ITERATION) 
-		: f(f_), inArea(inArea_), randomPt(randomPt_), radiusOfCut(radiusOfCut_), maxIteration(maxIteration_) {};
-	std::pair<vector<double>, double> optimize() const;
+	StochasticOptimizator(smoothFunction<double, vector<double>> f_, stopCriteria<vector<double>> Stop_, randomPointInCoveringArea randomPt_,
+		double radiusOfCut_=STANDART_RADIUS_OF_CUT, size_t maxIterations_ = MAX_OPTIMIZE_ITERATIONS) 
+		: OptimizatorInterface(f_, Stop_, maxIterations_), randomPt(randomPt_), radiusOfCut(radiusOfCut_){};
+	std::pair<vector<double>, double> optimize(vector<double> x0, inAreaCheck<vector<double>> inArea);
+	void setFunction(smoothFunction<double, vector<double>> f_) { f = f_; };
 };
 

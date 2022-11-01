@@ -1,27 +1,20 @@
 #pragma once
 #include "BasicDef.h"
+#include "DerivativeOptimizatorInterface.h"
 #include "LinearOptimizator.h"
-class GradOptFR
+class GradOptFR : public DerivativeOptimizatorInterface<vector<double>>
 {
 private:
-	smoothFunction f;
 	LinearOptimizator lo;
-	inAreaCheck inArea;
-	size_t maxIteration;
-	gradientFunction gf;
-	stopCriteria st;
 public:
-	GradOptFR(smoothFunction f_, gradientFunction g_, stopCriteria st_,
-		linearOptimizeMethod lom_, inAreaCheck inArea_, double step_ = LINEAR_OPTIMIZE_SPLIT_SIZE, double indent_ = LINEAR_OPTIMIZE_INDENT,
-		size_t maxIteration_ = MAX_OPTIMIZE_ITERATION
-		) :  f(f_), gf(g_), st(st_), inArea(inArea_), maxIteration(maxIteration_), lo(lom_, step_, indent_) {};
-	GradOptFR(smoothFunction f_, gradientFunction g_, stopCriteria st_,
-		LinearOptimizator lo_, inAreaCheck inArea_, size_t maxIteration_ = MAX_OPTIMIZE_ITERATION)
-		: f(f_), gf(g_), st(st_), inArea(inArea_), maxIteration(maxIteration_), lo(lo_) {};
+	GradOptFR(smoothFunction<double, vector<double>> f_, smoothFunction<vector<double>, vector<double>> gradf_, stopCriteria<vector<double>> Stop_,
+		linearOptimizeMethod lom_, stopCriteria<double> linearStop_, double step_ = LINEAR_OPTIMIZE_SPLIT_SIZE, double indent_ = LINEAR_OPTIMIZE_INDENT,
+		size_t maxIterations_ = MAX_OPTIMIZE_ITERATIONS
+		) : DerivativeOptimizatorInterface(f_, gradf_, Stop_, maxIterations_), lo(nullptr, nullptr, linearStop_, lom_, step_, indent_, maxIterations_) {};
+	GradOptFR(smoothFunction<double, vector<double>> f_, smoothFunction<vector<double>, vector<double>> gradf_, stopCriteria<vector<double>> Stop_,
+		LinearOptimizator lo_, size_t maxIterations_ = MAX_OPTIMIZE_ITERATIONS)
+		: DerivativeOptimizatorInterface(f_, gradf_, Stop_, maxIterations_), lo(lo_) {};
 	~GradOptFR() {};
-	std::pair<vector<double>, double> optimize(vector<double> x0) const;
-	void changeStopCriteria(stopCriteria st_) { st = st_; };
-	void changeFunction(smoothFunction f_, gradientFunction g_) { f = f_; gf = g_; };
-	void changeArea(inAreaCheck inArea_) { inArea = inArea_; };
+	std::pair<vector<double>, double> optimize(vector<double> x0, inAreaCheck<vector<double>> inArea) final;
 };
 

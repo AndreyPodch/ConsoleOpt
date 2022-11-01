@@ -10,7 +10,7 @@ bool StochasticOptimizator::isNotCutted(std::list<vector<double>>& v, vector<dou
     return true;
 }
 
-std::pair<vector<double>, double> StochasticOptimizator::optimize() const
+std::pair<vector<double>, double> StochasticOptimizator::optimize(vector<double> x0, inAreaCheck<vector<double>> inArea)
 {
     std::list<vector<double>> alreadyVisited;
     double optValue=1e8;
@@ -27,7 +27,7 @@ std::pair<vector<double>, double> StochasticOptimizator::optimize() const
                 optValue = f(curPoint);
                 optPoint = curPoint;
             }
-            if (curIter++ > maxIteration) break;
+            if (curIter++ > maxIterations) break;
         }
     } while (1);
     return std::make_pair(optPoint, optValue);
