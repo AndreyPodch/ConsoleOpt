@@ -2,17 +2,23 @@
 
 std::pair<double, double> LinearOptimizator::optimize(double x0, inAreaCheck<double> inArea)
 {
-    double optimalValue=f(-indent);
-    double optimalPoint = -indent;
-    for (double i = -indent; i < indent; i += step)
+    double leftInArea, rightInArea;
+    bool leftFounded = 0, rightFounded = 0;
+    double li = -indent, ri = indent;
+    while (!(leftFounded && rightFounded))
     {
-        if (!inArea(i) || !inArea(i + step)) continue;
-        std::pair<double, double> curIt = lom(i, i + step, f, fDiff);
-        if (curIt.second < optimalValue)
+        if (!leftFounded && inArea(li))
         {
-            optimalPoint = curIt.first;
-            optimalValue = curIt.second;
+            leftFounded=true;
+            leftInArea=li;
         }
+        if (!rightFounded && inArea(ri))
+        {
+            rightFounded = true;
+            rightInArea = ri;
+        }
+        li += searchStep;
+        ri -= searchStep;
     }
-    return std::make_pair(optimalPoint,optimalValue);
+    return lom(leftInArea, rightInArea, f, fDiff, searchPrecision);
 }

@@ -9,7 +9,7 @@ std::pair<vector<double>, double> GradOptFR::optimize(vector<double> x0, inAreaC
 		x0 = x1;
 		lo.DerivativeOptimizatorInterface::setFunctionAndDifferential(
 			[x0, this, p](double x)->double {return f(x0 + x * p); },
-			[x0, this, p](double x)->double {return scalarProduct(fDiff(x0 + x * p), p); }
+			[x0, this, p](double x)->double {return scalarProduct(fDiff(x0 + x * p), -p); }
 		);
 		double alpha = lo.optimize(0,[x0, inArea, this, p](double x)->bool {return inArea(x0 + x * p); }).first;
 		x1 = x0 + alpha * p;
