@@ -45,11 +45,11 @@ vector<double> randomInSquare()
 int main()
 {
 	LinearOptimizator w(nullptr, nullptr, nullptr, linearSearch);
-	GradOptFR pw(f2, gf2, closeCr, w, circleArea);
+	GradOptFR pw(f2, gf2, closeCr, w);
 	vector<double> testv(2);
 	testv[0] = 0;
 	testv[1] = 0;
-	std::cout << pw.optimize(testv).second<<std::endl<<"STOCHASTIC:"<<std::endl;
-	StochasticOptimizator s(f2, circleArea, randomInSquare, 1e-5, 100);
-	std::cout << s.optimize().second;
+	std::cout << pw.optimize(testv, circleArea).second<<std::endl<<"STOCHASTIC:"<<std::endl;
+	StochasticOptimizator s(f2, nullptr, randomInSquare, 1e-5, 100);
+	std::cout << s.optimize(testv, circleArea).second;
 }
