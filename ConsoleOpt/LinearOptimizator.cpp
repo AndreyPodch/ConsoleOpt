@@ -5,7 +5,7 @@ std::pair<double, double> LinearOptimizator::optimize(double x0, inAreaCheck<dou
     double leftInArea, rightInArea;
     bool leftFounded = 0, rightFounded = 0;
     double li = -indent, ri = indent;
-    while (!(leftFounded && rightFounded))
+    while (!(leftFounded && rightFounded)) // Looking for segment, that lies in area
     {
         if (!leftFounded && inArea(li))
         {

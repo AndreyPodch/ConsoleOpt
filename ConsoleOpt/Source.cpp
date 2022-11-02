@@ -50,6 +50,6 @@ int main()
 	testv[0] = 0;
 	testv[1] = 0;
 	std::cout << pw.optimize(testv, circleArea).second<<std::endl<<"STOCHASTIC:"<<std::endl;
-	StochasticOptimizator s(f2, nullptr, randomInSquare, 1e-5, 100);
+	StochasticOptimizator s(f2, closeCr, randomInSquare, 1e-5, 100);
 	std::cout << s.optimize(testv, circleArea).second;
 }

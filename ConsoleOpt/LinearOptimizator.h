@@ -1,12 +1,27 @@
 #pragma once
 #include "BasicDef.h"
 #include "DerivativeOptimizatorInterface.h"
+/// <summary>
+/// Implement optimize for double->double function with derivative
+/// </summary>
 class LinearOptimizator: public DerivativeOptimizatorInterface<double>
 {
 private:
+	/// <summary>
+	/// Method that used in optimization process
+	/// </summary>
 	linearOptimizeMethod lom;
+	/// <summary>
+	///	Indent in segment of search [-indent, indent]
+	/// </summary>
 	double indent;
+	/// <summary>
+	/// Search precision (used different in different criterias)
+	/// </summary>
 	double searchPrecision;
+	/// <summary>
+	/// Step in Area detection (more in optimize realization)
+	/// </summary>
 	double searchStep;
 public:
 	LinearOptimizator(smoothFunction<double, double> f_, smoothFunction<double, double> fDiff_, double searchPrecision_,

@@ -2,9 +2,15 @@
 #include "BasicDef.h"
 #include "DerivativeOptimizatorInterface.h"
 #include "LinearOptimizator.h"
+/// <summary>
+/// Implement Fisher-Rieves method for multidimensional optimization 
+/// </summary>
 class GradOptFR : public DerivativeOptimizatorInterface<vector<double>>
 {
 private:
+	/// <summary>
+	/// Linear Optimizator that used in optimize function
+	/// </summary>
 	LinearOptimizator lo;
 public:
 	GradOptFR(smoothFunction<double, vector<double>> f_, smoothFunction<vector<double>, vector<double>> gradf_, stopCriteria<vector<double>> Stop_,
