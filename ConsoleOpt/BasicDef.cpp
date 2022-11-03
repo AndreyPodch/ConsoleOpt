@@ -1,4 +1,9 @@
 #include "BasicDef.h"
+void print(vector<double> x)
+{
+	for (double el : x) std::cout << el << " "; 
+	std::cout << std::endl; 
+}
 double scalarProduct(vector<double> x, vector<double> y)
 {
 	if (x.size() != y.size()) throw std::out_of_range("Wrong vector sizes in scalar product");

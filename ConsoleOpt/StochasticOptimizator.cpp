@@ -18,6 +18,7 @@ bool StochasticOptimizator::isNotCutted(std::list<vector<double>>& v, vector<dou
 std::pair<vector<double>, double> StochasticOptimizator::optimize(vector<double> x0, inAreaCheck<vector<double>> inArea)
 {
     std::list<vector<double>> alreadyVisited;
+    bool notFirstIteration = 0;
     double optValue=f(x0);
     size_t curIter = 0;
     vector<double> optPoint, curPoint;
@@ -26,13 +27,19 @@ std::pair<vector<double>, double> StochasticOptimizator::optimize(vector<double>
         curPoint = randomPt(); // generate random point
         if (inArea(curPoint) && isNotCutted(alreadyVisited, curPoint)) // make selection
         {
+            if (curIter++ > maxIterations) break;
             alreadyVisited.push_back(curPoint);
             if (optValue > f(curPoint))
             {
+                if (!notFirstIteration) notFirstIteration = 1;
+                else
+                {
+                    x0 = optPoint;
+                }
                 optValue = f(curPoint);
                 optPoint = curPoint;
             }
-            if (curIter++ > maxIterations) break;
+            else continue;
         }
         else continue;
     } while (!Stop(x0,f(x0),curPoint,f(curPoint)));

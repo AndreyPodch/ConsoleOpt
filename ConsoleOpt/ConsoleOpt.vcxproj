@@ -140,23 +140,29 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AreasAndCovers.cpp" />
     <ClCompile Include="BasicDef.cpp" />
     <ClCompile Include="DerivativeOptimizatorInterface.cpp" />
+    <ClCompile Include="ExampleFunctions.cpp" />
     <ClCompile Include="GradOptFR.cpp" />
     <ClCompile Include="LinearOptimizator.cpp" />
     <ClCompile Include="LlnearOptimizeMethods.cpp" />
     <ClCompile Include="OptimizatorInterface.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="StochasticOptimizator.cpp" />
+    <ClCompile Include="StopCriterias.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AreasAndCovers.h" />
     <ClInclude Include="BasicDef.h" />
     <ClInclude Include="DerivativeOptimizatorInterface.h" />
+    <ClInclude Include="ExampleFunctions.h" />
     <ClInclude Include="GradOptFR.h" />
     <ClInclude Include="LinearOptimizator.h" />
     <ClInclude Include="LlnearOptimizeMethods.h" />
     <ClInclude Include="OptimizatorInterface.h" />
     <ClInclude Include="StochasticOptimizator.h" />
+    <ClInclude Include="StopCriterias.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
