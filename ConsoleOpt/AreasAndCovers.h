@@ -1,7 +1,6 @@
 #pragma once
 #include "BasicDef.h"
 
-bool boxArea(vector<double> x);
-bool circleArea(vector<double> x);
-vector<double> coverCircleAreaRG();
-vector<double> coverSphereAreaRG();
+bool boxArea(vector<double> x, vector<double> sidesSizes);
+bool ballArea(vector<double> x, double radius);
+vector<double> coverBallBoxAreaRG(vector<double> sidesSizes);

@@ -43,5 +43,6 @@ std::pair<vector<double>, double> StochasticOptimizator::optimize(vector<double>
         }
         else continue;
     } while (!Stop(x0,f(x0),curPoint,f(curPoint)));
+    numberOfIterations = curIter;
     return std::make_pair(optPoint, optValue);
 }

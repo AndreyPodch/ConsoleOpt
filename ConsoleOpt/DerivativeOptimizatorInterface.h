@@ -1,4 +1,5 @@
 #pragma once
+
 #include "BasicDef.h";
 #include "OptimizatorInterface.h"
 template <class T>

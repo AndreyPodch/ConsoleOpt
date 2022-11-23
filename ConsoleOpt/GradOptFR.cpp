@@ -17,11 +17,13 @@ std::pair<vector<double>, double> GradOptFR::optimize(vector<double> x0, inAreaC
 		vector<double> nextGrad = fDiff(x1);
 		double beta = scalarProduct(nextGrad, nextGrad) / scalarProduct(p, p);
 		p = beta * p - fDiff(x0); // Calculate new direction
-		std::cout << x0[0] << " " << x0[1] << std::endl;
-		std::cout << fDiff(x0)[0] << " " << fDiff(x0)[1] << std::endl;
-		std::cout << x1[0] << " " << x1[1] << std::endl;
-		std::cout << fDiff(x1)[0] << " " << fDiff(x1)[1] << std::endl;
+		//std::cout << x0[0] << " " << x0[1] << std::endl;
+		//std::cout << fDiff(x0)[0] << " " << fDiff(x0)[1] << std::endl;
+		/*std::cout << x1[0] << " " << x1[1] << std::endl;*/
+		//std::cout << fDiff(x1)[0] << " " << fDiff(x1)[1] << std::endl;
+		print(x0);
 		if (curIter++ > maxIterations) break;
 	} while (!Stop(x0,f(x0),x1,f(x1)));
+	numberOfIterations = curIter;
 	return std::make_pair(x1, f(x1));
 }

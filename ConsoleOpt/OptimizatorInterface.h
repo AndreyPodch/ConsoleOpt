@@ -20,6 +20,10 @@ protected:
 	/// Number of max iterations, when optimize process stoped
 	/// </summary>
 	size_t maxIterations;
+	/// <summary>
+	/// Number of iterations after last optimization
+	/// </summary>
+	size_t numberOfIterations;
 public:
 /// <summary>
 /// Find a minimum of function f
@@ -29,8 +33,9 @@ public:
 /// <returns> Pair of optimal point and optimal value </returns>
 	virtual std::pair<T, double> optimize(T x0, inAreaCheck<T> inArea) = 0;
 	OptimizatorInterface<T>(smoothFunction<double, T> f_, stopCriteria<T> Stop_, size_t maxIterations_=MAX_OPTIMIZE_ITERATIONS) 
-		:f( f_ ), Stop(Stop_), maxIterations(maxIterations_) {};
+		:f( f_ ), Stop(Stop_), maxIterations(maxIterations_), numberOfIterations(0) {};
 	void setStopCriteria(stopCriteria<T> Stop_) { Stop = Stop_; }
 	void setMaxIterations(size_t maxIterations_) { maxIterations = maxIterations_; }
+	size_t getNumberOfIterations() { return numberOfIterations; };
 };
 

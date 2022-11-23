@@ -24,7 +24,7 @@ template <class T, class P> using smoothFunction = std::function<T (P)>;
 // template <class T> using stopCriteria = bool(*)(T x0, double f0, T x1, double f1);
 template <class T> using stopCriteria = std::function<bool(T x0, double f0, T x1, double f1)>;
 template <class T> using inAreaCheck = std::function<bool(T)>;
-typedef vector<double>(*randomPointInCoveringArea)();
+using randomPointInCoveringArea = std::function<vector<double>()>;
 typedef std::pair<double, double>(*linearOptimizeMethod)(double &a, double &b, std::function <double(double)> f, std::function <double(double)> df, double eps);
 
 double scalarProduct(vector<double> x, vector<double> y);
