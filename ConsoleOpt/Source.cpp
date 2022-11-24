@@ -13,7 +13,7 @@
 //
 //double f1(vector<double> x)
 //{
-//	return scalarProduct(x,x);
+//	return innerProduct(x,x);
 //}
 //vector<double> gf1(vector<double> x)
 //{
@@ -45,6 +45,28 @@
 //	rv[1] = inSqrDist(defaultGen);
 //	return rv;
 //}
+//int main1()
+//{
+//	LinearOptimizeParameters lp(1e-3, 1);
+//	LinearOptimizator lo(nullptr, nullptr, ternarySearch, lp, 15000);
+//	vector<double> sidesSizes(2);
+//	sidesSizes[0] = 2; sidesSizes[1] = 2;
+//	inAreaCheck<vector<double>> inArea = [sidesSizes](vector<double> x)->bool {return boxArea(x, sidesSizes); };
+//	randomPointInCoveringArea coverArea = [sidesSizes]()->vector<double> {return coverBallBoxAreaRG(sidesSizes); };
+//	GradOptFR frOpt(f2, gf2, absValueDiffStop, lo, 15000);
+//	StochasticOptimizator stOpt(f2, absValueDiffStop, coverArea, 1e-4, 1000);
+//	vector<double> x0(2);
+//	x0[0] = 1; x0[1] = 1;
+//	std::cout << inArea(x0) << std::endl;
+//	std::cout << "Fisher-Rieves method:" << std::endl;
+//	std::cout << "Optimal value: " << frOpt.optimize(x0, inArea).second << std::endl;
+//	std::cout << "Number of iterations: " << frOpt.getNumberOfIterations() << std::endl;
+//	std::cout << "Stochastic method:" << std::endl;
+//	std::cout << "Optimal value: " << stOpt.optimize(x0, inArea).second << std::endl;
+//	std::cout << "Number of iterations: " << stOpt.getNumberOfIterations() << std::endl;
+//}
+
+
 
 int main()
 {
@@ -54,7 +76,9 @@ int main()
 	stopCriteria<vector<double>> stopCr;
 	inAreaCheck<vector<double>> inArea;
 	randomPointInCoveringArea coverArea;
-	LinearOptimizeParameters lp(0,0,0);
+	LinearOptimizeParameters lp(0,0);
+	double cutRadius;
+	double stopPrecision;
 	size_t maxIterations;
 	size_t fdim;
 	try
@@ -176,20 +200,22 @@ int main()
 		std::cout << "4) Relative point difference" << std::endl;
 		int a;
 		std::cin >> a;
+		std::cout << "Enter stop precision: " << std::endl;
+		std::cin >> stopPrecision;
 		vector<double> sidesSizes(fdim);
 		switch (a)
 		{
 		case 1:
-			stopCr = absValueDiffStop;
+			stopCr = [stopPrecision](auto x0, auto f0, auto x1, auto f1)->bool {return absValueDiffStop(x0, f0, x1, f1, stopPrecision); };
 			break;
 		case 2:
-			stopCr = absCoordDiffStop;
+			stopCr = [stopPrecision](auto x0, auto f0, auto x1, auto f1)->bool {return absCoordDiffStop(x0, f0, x1, f1, stopPrecision); };
 			break;
 		case 3:
-			stopCr = relValueDiffStop;
+			stopCr = [stopPrecision](auto x0, auto f0, auto x1, auto f1)->bool {return relValueDiffStop(x0, f0, x1, f1, stopPrecision); };
 			break;
 		case 4:
-			stopCr = relCoordDiffStop;
+			stopCr = [stopPrecision](auto x0, auto f0, auto x1, auto f1)->bool {return relCoordDiffStop(x0, f0, x1, f1, stopPrecision); };
 			break;
 		default:
 			throw("Wrong number");
@@ -202,12 +228,14 @@ int main()
 	}
 	try
 	{
-		std::cout << "Enter linear search parameters: searchPrecision, indent and searchStep: " << std::endl;
-		double a, b, c;
-		std::cin >> a >> b >> c;
-		lp=LinearOptimizeParameters(a, b, c);
+		std::cout << "Enter linear search parameters: searchPrecision and indent: " << std::endl;
+		double a, b;
+		std::cin >> a >> b;
+		lp=LinearOptimizeParameters(a, b);
 		std::cout << "Enter maximum of iterations: " << std::endl;
 		std::cin >> maxIterations;
+		std::cout << "Enter radius of cutting ball in stochastic method: " << std::endl;
+		std::cin >> cutRadius;
 	}
 	catch (...)
 	{
@@ -216,12 +244,17 @@ int main()
 	}
 	LinearOptimizator lo(nullptr, nullptr, lom, lp, maxIterations);
 	GradOptFR frOpt(f, gf, stopCr, lo, maxIterations);
-	StochasticOptimizator stOpt(f, stopCr, coverArea);
+	StochasticOptimizator stOpt(f, stopCr, coverArea, cutRadius, maxIterations);
 	while (true)
 	{
 		std::cout << "Enter " << fdim << " coordinates of start point:" << std::endl;
 		vector<double> x0(fdim);
 		for (double el : x0) std::cin >> el;
+		if (!inArea(x0))
+		{
+			std::cout << "Warning! Start point not in area." << std::endl;
+			continue;
+		}
 		std::cout << "Fisher-Rieves method:" << std::endl;
 		std::cout << "Optimal value: " << frOpt.optimize(x0, inArea).second << std::endl;
 		std::cout << "Number of iterations: " << frOpt.getNumberOfIterations() << std::endl;

@@ -37,6 +37,6 @@ vector<double> gf3(vector<double> x)
 	return vr;
 }
 
-double f4(vector<double> x) { return scalarProduct(x, x); }
+double f4(vector<double> x) { return innerProduct(x, x); }
 
 vector<double> gf4(vector<double> x) { return 2 * x; }

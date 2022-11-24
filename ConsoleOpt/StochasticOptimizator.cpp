@@ -19,6 +19,7 @@ std::pair<vector<double>, double> StochasticOptimizator::optimize(vector<double>
 {
     std::list<vector<double>> alreadyVisited;
     bool notFirstIteration = 0;
+    numberOfIterations = 0;
     double optValue=f(x0);
     size_t curIter = 0;
     vector<double> optPoint, curPoint;
@@ -43,6 +44,6 @@ std::pair<vector<double>, double> StochasticOptimizator::optimize(vector<double>
         }
         else continue;
     } while (!Stop(x0,f(x0),curPoint,f(curPoint)));
-    numberOfIterations = curIter;
+    numberOfIterations = curIter-2;
     return std::make_pair(optPoint, optValue);
 }

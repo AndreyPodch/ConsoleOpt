@@ -17,8 +17,8 @@ std::pair<double, double> LinearOptimizator::optimize(double x0, inAreaCheck<dou
             rightFounded = true;
             rightInArea = ri;
         }
-        li += lp.searchStep;
-        ri -= lp.searchStep;
+        li += lp.searchPrecision;
+        ri -= lp.searchPrecision;
     }
     return lom(leftInArea, rightInArea, f, fDiff, lp.searchPrecision);
 }

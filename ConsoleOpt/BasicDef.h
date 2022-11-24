@@ -27,5 +27,5 @@ template <class T> using inAreaCheck = std::function<bool(T)>;
 using randomPointInCoveringArea = std::function<vector<double>()>;
 typedef std::pair<double, double>(*linearOptimizeMethod)(double &a, double &b, std::function <double(double)> f, std::function <double(double)> df, double eps);
 
-double scalarProduct(vector<double> x, vector<double> y);
+double innerProduct(vector<double> x, vector<double> y);
 double distanceBetween(vector<double> x, vector<double> y);

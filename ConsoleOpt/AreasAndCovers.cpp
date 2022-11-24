@@ -10,7 +10,7 @@ bool boxArea(vector<double> x, vector<double> sidesSizes)
 	}
 	return true;
 }
-bool ballArea(vector<double> x, double radius) { return (scalarProduct(x, x) < 1); }
+bool ballArea(vector<double> x, double radius) { return (innerProduct(x, x) < 1); }
 
 vector<double> coverBallBoxAreaRG(vector<double> sidesSizes)
 {
