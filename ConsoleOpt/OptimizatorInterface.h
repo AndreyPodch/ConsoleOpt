@@ -23,7 +23,7 @@ protected:
 	/// <summary>
 	/// Number of iterations after last optimization
 	/// </summary>
-	size_t numberOfIterations;
+	size_t numberOfIterations=0;
 public:
 /// <summary>
 /// Find a minimum of function f

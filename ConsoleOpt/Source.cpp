@@ -45,30 +45,31 @@
 //	rv[1] = inSqrDist(defaultGen);
 //	return rv;
 //}
-//int main1()
-//{
-//	LinearOptimizeParameters lp(1e-3, 1);
-//	LinearOptimizator lo(nullptr, nullptr, ternarySearch, lp, 15000);
-//	vector<double> sidesSizes(2);
-//	sidesSizes[0] = 2; sidesSizes[1] = 2;
-//	inAreaCheck<vector<double>> inArea = [sidesSizes](vector<double> x)->bool {return boxArea(x, sidesSizes); };
-//	randomPointInCoveringArea coverArea = [sidesSizes]()->vector<double> {return coverBallBoxAreaRG(sidesSizes); };
-//	GradOptFR frOpt(f2, gf2, absValueDiffStop, lo, 15000);
-//	StochasticOptimizator stOpt(f2, absValueDiffStop, coverArea, 1e-4, 1000);
-//	vector<double> x0(2);
-//	x0[0] = 1; x0[1] = 1;
-//	std::cout << inArea(x0) << std::endl;
-//	std::cout << "Fisher-Rieves method:" << std::endl;
-//	std::cout << "Optimal value: " << frOpt.optimize(x0, inArea).second << std::endl;
-//	std::cout << "Number of iterations: " << frOpt.getNumberOfIterations() << std::endl;
-//	std::cout << "Stochastic method:" << std::endl;
-//	std::cout << "Optimal value: " << stOpt.optimize(x0, inArea).second << std::endl;
-//	std::cout << "Number of iterations: " << stOpt.getNumberOfIterations() << std::endl;
-//}
-
-
-
 int main()
+{
+	LinearOptimizeParameters lp(1e-3, 1);
+	LinearOptimizator lo(nullptr, nullptr, ternarySearch, lp, 15000);
+	vector<double> sidesSizes(2);
+	sidesSizes[0] = 2; sidesSizes[1] = 2;
+	inAreaCheck<vector<double>> inArea = [sidesSizes](vector<double> x)->bool {return boxArea(x, sidesSizes); };
+	randomPointInCoveringArea coverArea = [sidesSizes]()->vector<double> {return coverBallBoxAreaRG(sidesSizes); };
+	stopCriteria<vector<double>> absValueStopSE = [](auto x0, auto f0, auto x1, auto f1)->bool { return absValueDiffStop(x0, f0, x1, f1, 1e-6); };
+	GradOptFR frOpt(f2, gf2, absValueStopSE, lo, 15000);
+	StochasticOptimizator stOpt(f2, absValueStopSE, coverArea, 1e-4, 3000);
+	vector<double> x0(2);
+	x0[0] = 0; x0[1] = 0;
+	std::cout << inArea(x0) << std::endl;
+	std::cout << "Fisher-Rieves method:" << std::endl;
+	std::cout << "Optimal value: " << frOpt.optimize(x0, inArea).second << std::endl;
+	std::cout << "Number of iterations: " << frOpt.getNumberOfIterations() << std::endl;
+	std::cout << "Stochastic method:" << std::endl;
+	std::cout << "Optimal value: " << stOpt.optimize(x0, inArea).second << std::endl;
+	std::cout << "Number of iterations: " << stOpt.getNumberOfIterations() << std::endl;
+}
+
+
+
+int main1()
 {
 	smoothFunction<double, vector<double>> f;
 	smoothFunction<vector<double>, vector<double>> gf;
