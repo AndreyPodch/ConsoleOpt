@@ -45,12 +45,12 @@
 //	rv[1] = inSqrDist(defaultGen);
 //	return rv;
 //}
-int main()
+int main1()
 {
 	LinearOptimizeParameters lp(1e-3, 1);
-	LinearOptimizator lo(nullptr, nullptr, ternarySearch, lp, 15000);
+	LinearOptimizator lo(nullptr, nullptr, goldenSectionSearch, lp, 15000);
 	vector<double> sidesSizes(2);
-	sidesSizes[0] = 2; sidesSizes[1] = 2;
+	sidesSizes[0] = 3; sidesSizes[1] = 3;
 	inAreaCheck<vector<double>> inArea = [sidesSizes](vector<double> x)->bool {return boxArea(x, sidesSizes); };
 	randomPointInCoveringArea coverArea = [sidesSizes]()->vector<double> {return coverBallBoxAreaRG(sidesSizes); };
 	stopCriteria<vector<double>> absValueStopSE = [](auto x0, auto f0, auto x1, auto f1)->bool { return absValueDiffStop(x0, f0, x1, f1, 1e-6); };
@@ -65,11 +65,12 @@ int main()
 	std::cout << "Stochastic method:" << std::endl;
 	std::cout << "Optimal value: " << stOpt.optimize(x0, inArea).second << std::endl;
 	std::cout << "Number of iterations: " << stOpt.getNumberOfIterations() << std::endl;
+	return 0;
 }
 
 
 
-int main1()
+int main()
 {
 	smoothFunction<double, vector<double>> f;
 	smoothFunction<vector<double>, vector<double>> gf;
@@ -243,6 +244,24 @@ int main1()
 		std::cout << "Wrong enter parameters" << std::endl;
 		return -1;
 	}
+	//lp.searchPrecision = 1e-3;
+	//lp.indent = 1;
+	//fdim = 2;
+	//lom = goldenSectionSearch;
+	//double r = 3;
+	//vector<double> sidesSizes(fdim);
+	//for (double el : sidesSizes) el = r;
+	//inArea = [r](vector<double> x)->bool {return ballArea(x, r); };
+	//coverArea = [sidesSizes]()->vector<double> {return coverBallBoxAreaRG(sidesSizes); };
+	//cutRadius = 1e-4;
+	//maxIterations = 1000;
+	//f = f2;
+	//gf = gf2;
+	//stopPrecision = 1e-6;
+	//stopCr = [stopPrecision](auto x0, auto f0, auto x1, auto f1)->bool {return absValueDiffStop(x0, f0, x1, f1, stopPrecision); };
+	//std::cout << lp.searchPrecision << " " << lp.indent << std::endl;
+	//std::cout << maxIterations << std::endl;
+	//std::cout << cutRadius << std::endl;
 	LinearOptimizator lo(nullptr, nullptr, lom, lp, maxIterations);
 	GradOptFR frOpt(f, gf, stopCr, lo, maxIterations);
 	StochasticOptimizator stOpt(f, stopCr, coverArea, cutRadius, maxIterations);
@@ -250,7 +269,8 @@ int main1()
 	{
 		std::cout << "Enter " << fdim << " coordinates of start point:" << std::endl;
 		vector<double> x0(fdim);
-		for (double el : x0) std::cin >> el;
+		for (int i = 0; i < x0.size(); ++i) std::cin >> x0[i];
+		print(x0);
 		if (!inArea(x0))
 		{
 			std::cout << "Warning! Start point not in area." << std::endl;
