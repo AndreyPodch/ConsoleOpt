@@ -37,6 +37,12 @@ vector<double> gf3(vector<double> x)
 	return vr;
 }
 
-double f4(vector<double> x) { return innerProduct(x, x); }
+double f4(vector<double> x) { return exp(x[0]*x[1]-x[1])+pow(x[1]-2,2); }
 
-vector<double> gf4(vector<double> x) { return 2 * x; }
+vector<double> gf4(vector<double> x)
+{
+	vector<double> vr(x.size());
+	vr[0] = x[1]*exp(x[0] * x[1] - x[1]);
+	vr[1] = (x[0]-1)*exp(x[0] * x[1] - x[1])+2*(x[1]-2);
+	return vr;
+}

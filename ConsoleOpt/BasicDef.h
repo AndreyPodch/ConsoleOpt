@@ -4,6 +4,7 @@
 #include <functional>
 #include <iterator>
 #include <list>
+#include <deque>
 #include <exception>
 #include <random>
 #include <ctime>

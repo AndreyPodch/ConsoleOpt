@@ -24,6 +24,10 @@ protected:
 	/// Number of iterations after last optimization
 	/// </summary>
 	size_t numberOfIterations=0;
+	/// <summary>
+	/// Deque of visited points
+	/// </summary>
+	std::deque<T> path;
 public:
 /// <summary>
 /// Find a minimum of function f
@@ -37,5 +41,6 @@ public:
 	void setStopCriteria(stopCriteria<T> Stop_) { Stop = Stop_; }
 	void setMaxIterations(size_t maxIterations_) { maxIterations = maxIterations_; }
 	size_t getNumberOfIterations() { return numberOfIterations; };
+	const std::deque<T>* getPathPointer() { return &path; };
 };
 

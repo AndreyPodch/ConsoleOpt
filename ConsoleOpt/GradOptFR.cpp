@@ -4,6 +4,8 @@ std::pair<vector<double>, double> GradOptFR::optimize(vector<double> x0, inAreaC
 	numberOfIterations = 0;
 	vector<double> p = -fDiff(x0); // Set start direction
 	vector<double> x1 = x0;
+	path.clear();
+	path.push_back(x0);
 	size_t curIter = 0;
 	do
 	{
@@ -17,19 +19,20 @@ std::pair<vector<double>, double> GradOptFR::optimize(vector<double> x0, inAreaC
 		double alpha = lo.optimize(0,inSegment).first;
 		x1 = x0 + alpha * p; // Get new point
 		vector<double> nextGrad = fDiff(x1);
-		/*print(nextGrad);
-		print(p);
-		std::cout << innerProduct(nextGrad, nextGrad) << " " << innerProduct(p, p) << std::endl;*/
+		// print(nextGrad);
+		// print(p);
+		//std::cout << innerProduct(nextGrad, nextGrad) << " " << innerProduct(p, p) << std::endl;
 		double beta = innerProduct(nextGrad, nextGrad) / innerProduct(p, p);
 		p = beta * p - fDiff(x0); // Calculate new direction
 		//std::cout << x0[0] << " " << x0[1] << std::endl;
 		//std::cout << fDiff(x0)[0] << " " << fDiff(x0)[1] << std::endl;
 		/*std::cout << x1[0] << " " << x1[1] << std::endl;*/
 		//std::cout << fDiff(x1)[0] << " " << fDiff(x1)[1] << std::endl;
-		print(x0);
-		//print(x1);
+		// print(x0);
+		// print(x1);
+		path.push_back(x1);
 		if (curIter++ > maxIterations) break;
 	} while (!Stop(x0,f(x0),x1,f(x1)));
-	numberOfIterations = curIter-2;
+	numberOfIterations = curIter;
 	return std::make_pair(x1, f(x1));
 }

@@ -20,6 +20,8 @@ std::pair<vector<double>, double> StochasticOptimizator::optimize(vector<double>
     std::list<vector<double>> alreadyVisited;
     bool notFirstIteration = 0;
     numberOfIterations = 0;
+    path.clear();
+    path.push_back(x0);
     double optValue=f(x0);
     size_t curIter = 0;
     vector<double> optPoint, curPoint;
@@ -39,6 +41,7 @@ std::pair<vector<double>, double> StochasticOptimizator::optimize(vector<double>
                 }
                 optValue = f(curPoint);
                 optPoint = curPoint;
+                path.push_back(curPoint);
             }
             else continue;
         }
